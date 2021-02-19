@@ -1,7 +1,7 @@
 importScripts('/src/js/idb.js');
 importScripts('/src/js/utility.js');
 
-var CACHE_STATIC_NAME = 'static-v24';
+var CACHE_STATIC_NAME = 'static-v33';
 var CACHE_DYNAMIC_NAME = 'dynamic-v2';
 var STATIC_FILES = [
   '/',
@@ -133,7 +133,13 @@ self.addEventListener('sync', function (event) {
       readAllData('sync-posts')
       .then(function (data) {
         for (var dt of data) {
-          fetch('https://pwagram-e67f6-default-rtdb.europe-west1.firebasedatabase.app/posts.json', {
+          /* var postData = new FormData();
+          postData.append('id', dt.id);
+          postData.append('title', dt.title);
+          postData.append('location', dt.location);
+          postData.append('file', dt.picture, dt.id+'.png'); */
+
+          fetch('https://europe-west6-pwagram-e67f6.cloudfunctions.net/storePostData', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -149,7 +155,9 @@ self.addEventListener('sync', function (event) {
             .then(function (res) {
               console.log('Sent data', res);
               if(res.ok){
-                deleteItemFromData('sync-posts', dt.id);
+                res.json().then(function(resData){
+                  deleteItemFromData('sync-posts', resData.id);
+                });
               }
             })
             .catch(function(err){
@@ -159,6 +167,22 @@ self.addEventListener('sync', function (event) {
       })
     );
   }
+});
+
+self.addEventListener('notificationclick', function(event){
+  var notification = event.notification;
+  var action = event.action;
+  console.log(notification);
+  if(action === 'confirm'){
+    console.log('confirm was chosen');
+    notification.close();
+  }else{
+    console.log(action);
+  }
+});
+
+self.addEventListener('notificationclose', function(event){
+  console.log('notification was closed');
 });
 
 // self.addEventListener('fetch', function(event) {

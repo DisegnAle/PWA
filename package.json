@@ -4,7 +4,8 @@
   "description": "A complete guide to PWAs. Building a simple Instagram clone.",
   "main": "index.js",
   "scripts": {
-    "start": "http-server -c-1"
+    "start": "http-server -c-1",
+    "web-push": "web-push"
   },
   "keywords": [
     "pwa",
@@ -17,6 +18,9 @@
   "author": "Maximilian Schwarzmüller",
   "license": "ISC",
   "devDependencies": {
-    "http-server": "^0.10.0"
-  }
+    "firebase-tools": "^9.4.0",
+    "http-server": "^0.10.0",
+    "web-push": "^3.4.4"
+  },
+  "dependencies": {}
 }
