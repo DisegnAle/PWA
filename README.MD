@@ -7,3 +7,9 @@ You need [Node.js](https://nodejs.org) installed on your machine. Simply downloa
 Once Node.js is installed, open your command prompt or terminal and **navigate into this project folder**. There, run `npm install` to install all required dependencies.
 
 Finally, run `npm start` to start the development server and visit [localhost:8080](http://localhost:8080) to see the running application.
+
+# Description
+This project is made for studying PWAs purposes.
+It uses firebase database and functions.
+It's possible to find different caching strategies (cache then network strategy)
+It's possible to try some native mobile features (camera and geolocalization)
